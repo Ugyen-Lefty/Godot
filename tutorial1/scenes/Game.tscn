@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://duvx2apnhcsnn"]
+
+[ext_resource type="PackedScene" uid="uid://bal0t4hlrppaf" path="res://scenes/Player.tscn" id="1_ibkli"]
+[ext_resource type="Script" uid="uid://iramo5134vqj" path="res://scripts/game.gd" id="1_qbsmt"]
+[ext_resource type="PackedScene" uid="uid://b37aarmldbqwx" path="res://scenes/Mob.tscn" id="2_cpr0p"]
+[ext_resource type="Texture2D" uid="uid://ciuvgw4jmss7j" path="res://icon.svg" id="4_78awf"]
+[ext_resource type="PackedScene" uid="uid://djoak2ejnbp7k" path="res://scenes/hud.tscn" id="5_s0nni"]
+[ext_resource type="AudioStream" uid="uid://fhxky2ks0fp0" path="res://art/House In a Forest Loop.ogg" id="6_kiw3p"]
+[ext_resource type="AudioStream" uid="uid://ceudhlhigkoyl" path="res://art/gameover.wav" id="7_400sg"]
+
+[sub_resource type="Curve2D" id="Curve2D_ibkli"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -57.1368, 28.8594, 0, 0, 0, 0, -24.9525, 28.8594, 0, 0, 0, 0, 2667.59, 22.9061, 0, 0, 0, 0, 2626.43, 794.783, 0, 0, 0, 0, -57.1368, 753.969, -3.08186, -9.00281, 3.08186, 9.00281, -57.1368, 28.8594)
+}
+point_count = 6
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_qbsmt")
+mob_scene = ExtResource("2_cpr0p")
+metadata/_edit_group_ = true
+
+[node name="Player" parent="." instance=ExtResource("1_ibkli")]
+position = Vector2(583, 429)
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(583, 429)
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MobPath" type="Path2D" parent="."]
+position = Vector2(42.5046, -33.9608)
+scale = Vector2(0.726684, 1.3953)
+curve = SubResource("Curve2D_ibkli")
+
+[node name="MobSpawnPoint" type="PathFollow2D" parent="MobPath"]
+position = Vector2(-57.1368, 28.8594)
+scale = Vector2(-4.78493, 0.266136)
+
+[node name="Sprite2D" type="Sprite2D" parent="MobPath/MobSpawnPoint"]
+visible = false
+position = Vector2(-1.77877, -28.9887)
+scale = Vector2(0.383259, 3.90943)
+texture = ExtResource("4_78awf")
+
+[node name="HUD" parent="." instance=ExtResource("5_s0nni")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -4
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(2.40654e-06, 0.459561, 0.533794, 1)
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_kiw3p")
+volume_db = -20.8
+autoplay = true
+parameters/looping = false
+
+[node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_400sg")
+pitch_scale = 10.0
+
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="start_game" from="HUD" to="Player" method="_on_hud_start_game"]
