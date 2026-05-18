@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://btyfpf1mvrwkt"]
+
+[ext_resource type="Script" uid="uid://0xx4rvgfmmtu" path="res://scripts/obstacle.gd" id="1_7ukg5"]
+[ext_resource type="Texture2D" uid="uid://d3jw3lnywfd8k" path="res://assets/Tiles/Style 1/SimpleStyle1.png" id="2_drdry"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ukg5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_drdry"]
+size = Vector2(62, 549)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjuko"]
+size = Vector2(18.5, 128)
+
+[node name="Obstacle" type="CharacterBody2D" unique_id=2087689583 groups=["obstacles"]]
+script = ExtResource("1_7ukg5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=580717823]
+shape = SubResource("RectangleShape2D_7ukg5")
+disabled = true
+
+[node name="PipeTop" type="Area2D" parent="." unique_id=696062005]
+position = Vector2(0, -185)
+
+[node name="Sprite2D" type="Sprite2D" parent="PipeTop" unique_id=149294855]
+position = Vector2(0.07996779, -109.1301)
+scale = Vector2(2.245002, 5.799257)
+texture = ExtResource("2_drdry")
+region_enabled = true
+region_rect = Rect2(0, -0.08347154, 32.19754, 81.145515)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeTop" unique_id=1030106887]
+position = Vector2(0, -147.5)
+shape = SubResource("RectangleShape2D_drdry")
+
+[node name="PipeBottom" type="Area2D" parent="." unique_id=78943592]
+position = Vector2(0, 204)
+
+[node name="Sprite2D" type="Sprite2D" parent="PipeBottom" unique_id=1935516098]
+position = Vector2(0, 96.63013)
+scale = Vector2(2.240004, 5.515307)
+texture = ExtResource("2_drdry")
+region_enabled = true
+region_rect = Rect2(0, -0.08347154, 32.19754, 81.145515)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PipeBottom" unique_id=1980120689]
+position = Vector2(0, 148)
+shape = SubResource("RectangleShape2D_drdry")
+
+[node name="ScoreArea" type="Area2D" parent="." unique_id=319095806]
+position = Vector2(0, 11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea" unique_id=2066960907]
+position = Vector2(39.999996, -3)
+scale = Vector2(1.1, 1.1)
+shape = SubResource("RectangleShape2D_cjuko")
+
+[connection signal="body_entered" from="PipeTop" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="PipeBottom" to="." method="_on_pipe_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]

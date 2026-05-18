@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://bpgeocsms0kfn"]
+
+[ext_resource type="Script" uid="uid://cnucagid46tws" path="res://scripts/hud.gd" id="1_ahhtf"]
+[ext_resource type="Texture2D" uid="uid://dsnh3kk36sw6f" path="res://assets/Flappy_Bird_assets by kosresetr55/UI/message.png" id="2_oo0fn"]
+[ext_resource type="PackedScene" uid="uid://cygraemef3ig7" path="res://scenes/game_over_screen.tscn" id="3_5ysmq"]
+
+[sub_resource type="SystemFont" id="SystemFont_ahhtf"]
+font_names = PackedStringArray("Pixelify Sans")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_oo0fn"]
+font = SubResource("SystemFont_ahhtf")
+font_size = 48
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[node name="HUD" type="CanvasLayer" unique_id=1030937922]
+script = ExtResource("1_ahhtf")
+
+[node name="ScoreLabel" type="Label" parent="." unique_id=1628880959]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -480.0
+offset_bottom = 106.0
+grow_horizontal = 0
+text = "999"
+label_settings = SubResource("LabelSettings_oo0fn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartMessage" type="TextureRect" parent="." unique_id=1462069601]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -113.999985
+offset_top = 135.0
+offset_right = 70.0
+offset_bottom = 402.0
+grow_horizontal = 2
+scale = Vector2(1.3, 1.3)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_oo0fn")
+
+[node name="GameOverScreen" parent="." unique_id=491752789 instance=ExtResource("3_5ysmq")]
+visible = false

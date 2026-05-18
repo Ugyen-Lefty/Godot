@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://iosw0yc3mpia"]
+
+[ext_resource type="Script" uid="uid://bojlesitcyuvh" path="res://scripts/game.gd" id="1_3dryh"]
+[ext_resource type="PackedScene" uid="uid://cks18nmxyvipj" path="res://Scenes/player.tscn" id="1_qxrlw"]
+[ext_resource type="Texture2D" uid="uid://c3fkuiaf1esgd" path="res://Art/Bg.png" id="2_wowpa"]
+[ext_resource type="PackedScene" uid="uid://ddpntjdfc6q31" path="res://Scenes/ball.tscn" id="2_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://dtikwu8odnyic" path="res://Scenes/bot.tscn" id="3_wrm1d"]
+[ext_resource type="FontFile" uid="uid://cd8iv2nt15adu" path="res://Art/pixel_font.ttf" id="6_i6g32"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrm1d"]
+size = Vector2(370, 14)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_3dryh")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 326)
+scale = Vector2(1, 1.00617)
+texture = ExtResource("2_wowpa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.211765, 0.239216, 0.321569, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_qxrlw")]
+position = Vector2(128, 296)
+motion_mode = 0
+
+[node name="Bot" parent="." instance=ExtResource("3_wrm1d")]
+position = Vector2(1024, 296)
+
+[node name="Ball" parent="." instance=ExtResource("2_wrm1d")]
+position = Vector2(144, 127)
+collision_layer = 2
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="Ceiling" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(573, -7)
+scale = Vector2(3.68, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Ceiling"]
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="Floor" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(576, 655)
+scale = Vector2(3.68, 1)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/Floor"]
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="ScoringAreas" type="Node2D" parent="."]
+
+[node name="PlayerScoringArea" type="Area2D" parent="ScoringAreas"]
+position = Vector2(1174, 309)
+scale = Vector2(0.12, 50.88)
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoringAreas/PlayerScoringArea"]
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="BotScoringArea" type="Area2D" parent="ScoringAreas"]
+position = Vector2(-22, 310)
+scale = Vector2(0.12, 50.88)
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoringAreas/BotScoringArea"]
+shape = SubResource("RectangleShape2D_wrm1d")
+
+[node name="BallTimer" type="Timer" parent="."]
+
+[node name="Hud" type="Node2D" parent="."]
+
+[node name="PlayerScore" type="Label" parent="Hud"]
+offset_left = 360.0
+offset_top = 64.0
+offset_right = 400.0
+offset_bottom = 87.0
+scale = Vector2(3.77342, 3.6201)
+theme_override_fonts/font = ExtResource("6_i6g32")
+text = "0"
+horizontal_alignment = 1
+
+[node name="BotScore" type="Label" parent="Hud"]
+offset_left = 613.0
+offset_top = 64.0
+offset_right = 653.0
+offset_bottom = 87.0
+scale = Vector2(3.77342, 3.6201)
+theme_override_fonts/font = ExtResource("6_i6g32")
+text = "0"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="ScoringAreas/PlayerScoringArea" to="." method="player_score"]
+[connection signal="body_entered" from="ScoringAreas/BotScoringArea" to="." method="bot_score"]
+[connection signal="timeout" from="BallTimer" to="." method="new_game"]

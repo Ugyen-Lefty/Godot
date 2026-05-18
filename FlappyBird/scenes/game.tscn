@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://kxcjvt8uxkx7"]
+
+[ext_resource type="Script" uid="uid://deiyrot0f7lhd" path="res://scripts/game.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://chkx0ufylkhhu" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bgr36slmocnpb" path="res://scenes/obstacle_spawner.tscn" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://bpgeocsms0kfn" path="res://scenes/hud.tscn" id="2_p57ef"]
+[ext_resource type="PackedScene" uid="uid://bmcm35ttfmerh" path="res://scenes/ground.tscn" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://wjfd63ycjgwe" path="res://assets/Flappy_Bird_assets by kosresetr55/Game Objects/background-day.png" id="3_p57ef"]
+
+[node name="Game" type="Node2D" unique_id=1928575778]
+script = ExtResource("1_lbhrr")
+
+[node name="HUD" parent="." unique_id=1030937922 instance=ExtResource("2_p57ef")]
+
+[node name="Background" type="Sprite2D" parent="." unique_id=931967868]
+position = Vector2(236, 437.00003)
+scale = Vector2(1.6944444, 1.7265625)
+texture = ExtResource("3_p57ef")
+
+[node name="ObstacleSpawner" parent="." unique_id=1531586070 instance=ExtResource("2_iywne")]
+position = Vector2(700, 400)
+
+[node name="Ground" parent="." unique_id=510267848 instance=ExtResource("2_yqjtg")]
+position = Vector2(-10, 713)
+
+[node name="Player" parent="." unique_id=289599900 instance=ExtResource("1_uwrxv")]
+position = Vector2(96, 368)
+
+[connection signal="died" from="Player" to="." method="_on_player_died"]
+[connection signal="game_started" from="Player" to="." method="_on_player_game_started"]
+[connection signal="scored" from="Player" to="." method="_on_player_scored"]

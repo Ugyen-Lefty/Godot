@@ -1,0 +1,17 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1778477573
+export_presets.cfg::TextFile::-1::1755522965::0::1::::<><><>0<>0<><>::
+icon.svg::CompressedTexture2D/CompressedTexture2D::8522300000604279437::1755353728::1755353737::1::::<><><>0<>0<>23985e7a9ee0d73f2a3367fc96dc567b<>res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex::
+::res://Art/::1755520727
+Bg.png::CompressedTexture2D::6749094184276071543::1755520675::1755520727::1::::<><><>0<>0<>83564afa94b75f7495abd8ce34d4266f<>res://.godot/imported/Bg.png-9e7ef7355031638d35399c0d8324986a.ctex::
+pixel_font.ttf::FontFile::5052057040910514730::1755520675::1755520727::1::::<><><>0<>0<>bedc3ad69936902fb6f200fec410d414<>res://.godot/imported/pixel_font.ttf-749313a3b1e0c028bb02b3b4aac8251b.fontdata::
+::res://Scenes/::1755522876
+ball.tscn::PackedScene::7401617976870106250::1755522685::0::1::::<><><>0<>0<><>::uid://co7y8q84m7myp::::res://Scripts/ball.gd
+bot.tscn::PackedScene::8510012661714161546::1755522686::0::1::::<><><>0<>0<><>::uid://dm4oslokssk3y::::res://scripts/bot.gd
+game.tscn::PackedScene::591545581284637100::1755522876::0::1::::<><><>0<>0<><>::uid://bojlesitcyuvh::::res://scripts/game.gd<>uid://cks18nmxyvipj::::res://Scenes/player.tscn<>uid://c3fkuiaf1esgd::::res://Art/Bg.png<>uid://ddpntjdfc6q31::::res://Scenes/ball.tscn<>uid://dtikwu8odnyic::::res://Scenes/bot.tscn<>uid://cd8iv2nt15adu::::res://Art/pixel_font.ttf
+player.tscn::PackedScene::5513526878769518383::1755522685::0::1::::<><><>0<>0<><>::uid://bs0u8ar65k6pj::::res://Scripts/player.gd
+::res://Scripts/::1755522685
+ball.gd::GDScript::5823062298160908815::1755522361::0::1::::<>CharacterBody2D<><>0<>0<><>::
+bot.gd::GDScript::8062277911655685608::1755522342::0::1::::<>CharacterBody2D<><>0<>0<><>::
+game.gd::GDScript::3388319883153793889::1755522685::0::1::::<>Node2D<><>0<>0<><>::
+player.gd::GDScript::3702702611794061907::1755515946::0::1::::<>CharacterBody2D<><>0<>0<><>::
