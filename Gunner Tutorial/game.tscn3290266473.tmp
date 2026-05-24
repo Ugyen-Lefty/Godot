@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://b3u84076due2"]
+
+[ext_resource type="PackedScene" uid="uid://dvxo418wt5vxu" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://c0gpy0pye4jr6" path="res://tree.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://d1dvx2tras4t4" path="res://slime.tscn" id="3_feb5d"]
+
+[node name="Game" type="Node2D" unique_id=966853447]
+y_sort_enabled = true
+
+[node name="Background" type="ColorRect" parent="." unique_id=1962067081]
+offset_left = -13.0
+offset_top = -19.0
+offset_right = 1945.0
+offset_bottom = 1111.0
+
+[node name="Player" parent="." unique_id=402994035 instance=ExtResource("1_80nbo")]
+position = Vector2(996, 544)
+
+[node name="Trees" type="Node" parent="." unique_id=138636652]
+
+[node name="Tree" parent="Trees" unique_id=470664928 instance=ExtResource("2_e2o6t")]
+position = Vector2(172, 275)
+
+[node name="Tree2" parent="Trees" unique_id=168888251 instance=ExtResource("2_e2o6t")]
+position = Vector2(201, 985)
+
+[node name="Tree3" parent="Trees" unique_id=287583908 instance=ExtResource("2_e2o6t")]
+position = Vector2(344, 641)
+
+[node name="Tree4" parent="Trees" unique_id=910820125 instance=ExtResource("2_e2o6t")]
+position = Vector2(1489, 961)
+
+[node name="Tree5" parent="Trees" unique_id=237476061 instance=ExtResource("2_e2o6t")]
+position = Vector2(1785, 219)
+
+[node name="Tree6" parent="Trees" unique_id=18624254 instance=ExtResource("2_e2o6t")]
+position = Vector2(1690, 600)
+
+[node name="Tree7" parent="Trees" unique_id=1495787319 instance=ExtResource("2_e2o6t")]
+position = Vector2(821, 1038)
+
+[node name="Tree8" parent="Trees" unique_id=2005833514 instance=ExtResource("2_e2o6t")]
+position = Vector2(1266, 270)
+
+[node name="Slime" parent="." unique_id=798762013 instance=ExtResource("3_feb5d")]
+position = Vector2(484, 321)
+mob_speed = null

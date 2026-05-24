@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://b3u84076due2"]
+
+[ext_resource type="PackedScene" uid="uid://dvxo418wt5vxu" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://dususlr2yr63q" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c0gpy0pye4jr6" path="res://tree.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://d1dvx2tras4t4" path="res://slime.tscn" id="3_feb5d"]
+
+[sub_resource type="Curve2D" id="Curve2D_feb5d"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -391, -396, 0, 0, 0, 0, 2153, -386, 0, 0, 0, 0, 2157, 1548, 0, 0, 0, 0, -419, 1513, 0, 0, 0, 0, -391, -389)
+}
+point_count = 5
+
+[node name="Game" type="Node2D" unique_id=966853447]
+y_sort_enabled = true
+script = ExtResource("1_fc0e3")
+mob_scene = ExtResource("3_feb5d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1311021670]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1962067081]
+offset_left = -13.0
+offset_top = -19.0
+offset_right = 1945.0
+offset_bottom = 1111.0
+
+[node name="Player" parent="." unique_id=402994035 instance=ExtResource("1_80nbo")]
+unique_name_in_owner = true
+position = Vector2(957, 544)
+
+[node name="Path2D" type="Path2D" parent="Player" unique_id=657946539]
+position = Vector2(-957, -544)
+curve = SubResource("Curve2D_feb5d")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1199086613]
+unique_name_in_owner = true
+position = Vector2(-391, -396)
+rotation = 0.0039307973
+
+[node name="Trees" type="Node" parent="." unique_id=138636652]
+
+[node name="Tree" parent="Trees" unique_id=470664928 instance=ExtResource("2_e2o6t")]
+position = Vector2(172, 275)
+
+[node name="Tree2" parent="Trees" unique_id=168888251 instance=ExtResource("2_e2o6t")]
+position = Vector2(201, 985)
+
+[node name="Tree3" parent="Trees" unique_id=287583908 instance=ExtResource("2_e2o6t")]
+position = Vector2(344, 641)
+
+[node name="Tree4" parent="Trees" unique_id=910820125 instance=ExtResource("2_e2o6t")]
+position = Vector2(1489, 961)
+
+[node name="Tree5" parent="Trees" unique_id=237476061 instance=ExtResource("2_e2o6t")]
+position = Vector2(1785, 219)
+
+[node name="Tree6" parent="Trees" unique_id=18624254 instance=ExtResource("2_e2o6t")]
+position = Vector2(1690, 600)
+
+[node name="Tree7" parent="Trees" unique_id=1495787319 instance=ExtResource("2_e2o6t")]
+position = Vector2(821, 1038)
+
+[node name="Tree8" parent="Trees" unique_id=2005833514 instance=ExtResource("2_e2o6t")]
+position = Vector2(1266, 270)
+
+[node name="MobSpawnTimer" type="Timer" parent="." unique_id=361818684]
+wait_time = 0.3
+autostart = true
+
+[node name="GameOver" type="CanvasLayer" parent="." unique_id=1145217257]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GameOver" unique_id=141581009]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7411765)
+
+[node name="Label" type="Label" parent="GameOver/ColorRect" unique_id=1899690440]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -301.0
+offset_right = 299.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="Button" type="Button" parent="GameOver" unique_id=976896094]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -31.5
+offset_right = 103.0
+offset_bottom = 31.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Start Over"
+
+[connection signal="health_depleted" from="Player" to="." method="_on_player_health_depleted"]
+[connection signal="timeout" from="MobSpawnTimer" to="." method="_on_mob_spawn_timer_timeout"]
+[connection signal="pressed" from="GameOver/Button" to="." method="_on_button_pressed"]
